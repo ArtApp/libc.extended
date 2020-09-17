@@ -1,0 +1,62 @@
+{
+  "ar": {
+    "SpaceNotFoundInDateString": "مساحة غير موجودة في سلسلة التاريخ",
+    "Unknown": "غير معروف",
+    "InvalidInput": "إدخال غير صالح",
+    "UnknownError": "خطأ غير معروف"
+  },
+  "fa": {
+    "SpaceNotFoundInDateString": "کاراکتر فاصله در رشته تاریخ یافت نشد",
+    "Unknown": "نامشخص",
+    "InvalidInput": "خطا در اطلاعات ورودی",
+    "UnknownError": "خطای نامشخص"
+  },
+  "en": {
+    "SpaceNotFoundInDateString": "Space not found in date string",
+    "Unknown": "Unknown",
+    "InvalidInput": "Invalid input",
+    "UnknownError": "Unknown error"
+  },
+  "de": {
+    "SpaceNotFoundInDateString": "Leerzeichen in Datumszeichenfolge nicht gefunden",
+    "Unknown": "Unbekannt",
+    "InvalidInput": "Ungültige Eingabe",
+    "UnknownError": "Unbekannter Fehler!"
+  },
+  "fr": {
+    "SpaceNotFoundInDateString": "Espace non trouvé dans la chaîne de date",
+    "Unknown": "inconnu",
+    "InvalidInput": "Entrée non valide",
+    "UnknownError": "Erreur inconnue!"
+  },
+  "es": {
+    "SpaceNotFoundInDateString": "Espacio no encontrado en la cadena de fecha",
+    "Unknown": "Desconocido",
+    "InvalidInput": "Entrada no válida",
+    "UnknownError": "Error desconocido!"
+  },
+  "tr": {
+    "SpaceNotFoundInDateString": "Tarih dizesinde boşluk bulunamadı",
+    "Unknown": "Bilinmiyor",
+    "InvalidInput": "Geçersiz Giriş",
+    "UnknownError": "Bilinmeyen hata!"
+  },
+  "ru": {
+    "SpaceNotFoundInDateString": "Пробел не найден в строке даты",
+    "Unknown": "неизвестно",
+    "InvalidInput": "Недопустимый ввод",
+    "UnknownError": "Неизвестная ошибка!"
+  },
+  "ur": {
+    "SpaceNotFoundInDateString": "تاریخ کے تار میں جگہ نہیں ملی",
+    "Unknown": "‏‏نامعلوم",
+    "InvalidInput": "‏‏ناجائز ان پٹ",
+    "UnknownError": "نامعلوم غلطی!"
+  },
+  "ps": {
+    "SpaceNotFoundInDateString": "د نیټې په تار کې ځای ونه موندل شو",
+    "Unknown": "نامعلومه",
+    "InvalidInput": "ناسمه انډول!",
+    "UnknownError": "نامعلومه تېروتنه!"
+  }
+}
