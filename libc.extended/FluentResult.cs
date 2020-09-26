@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
 namespace libc.extended {
     public class FluentResult {
         [JsonIgnore]
@@ -10,11 +11,13 @@ namespace libc.extended {
         public List<string> Errors { get; set; } = new List<string>();
         public List<string> Messages { get; set; } = new List<string>();
         public FluentResult AddError(params string[] errors) {
-            if (errors != null) Errors.AddRange(errors);
+            if (errors != null)
+                Errors.AddRange(errors);
             return this;
         }
         public FluentResult AddMessage(params string[] messages) {
-            if (messages != null) Messages.AddRange(messages);
+            if (messages != null)
+                Messages.AddRange(messages);
             return this;
         }
         /// <summary>

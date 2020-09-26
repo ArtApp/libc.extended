@@ -1,26 +1,17 @@
 ﻿using System.Globalization;
 using libc.extended.Extensions;
-using Newtonsoft.Json;
 using NodaTime;
 namespace libc.extended.Dating {
     public sealed class Dat : NotifyModel, IUpdatable {
         public const string PrettyDatePattern = "dddd d MMMM yyyy";
         public const string PrettyDateTimePatter = "dddd d MMMM yyyy h:m:s tt";
-        [JsonIgnore]
         private int _Day;
-        [JsonIgnore]
         private int _Hour;
-        [JsonIgnore]
         private int _Millisecond;
-        [JsonIgnore]
         private int _Minute;
-        [JsonIgnore]
         private int _Month;
-        [JsonIgnore]
         private int _Second;
-        [JsonIgnore]
         private int _Year;
-        [JsonIgnore]
         private ZoneInfo _ZoneInfo;
         public Dat() {
         }

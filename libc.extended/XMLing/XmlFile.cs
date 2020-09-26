@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
 namespace libc.extended.XMLing {
     public abstract class XmlFile {
-        [JsonIgnore]
         [XmlIgnore]
         public string FilePath;
         public abstract object CreateDefault();
