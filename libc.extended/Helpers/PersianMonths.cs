@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using libc.extended.BoolOperations;
-namespace libc.extended.Helpers {
-    public static class PersianMonths {
+
+namespace libc.extended.Helpers
+{
+    public static class PersianMonths
+    {
         private static readonly Dictionary<string, (int num, Func<string, bool> resolver)> dic =
-            new Dictionary<string, (int num, Func<string, bool> resolver)> {
+            new Dictionary<string, (int num, Func<string, bool> resolver)>
+            {
                 {
-                    "فروردین", (1, s => {
+                    "فروردین", (1, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("فرو"))
                             .Add(s.Contains("فـرو"))
@@ -15,8 +20,10 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("رور"))
                             .Value();
                     })
-                }, {
-                    "اردیبهشت", (2, s => {
+                },
+                {
+                    "اردیبهشت", (2, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("بهشت"))
                             .Add(s.Contains("بـهشت"))
@@ -36,8 +43,10 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("دیـب"))
                             .Value();
                     })
-                }, {
-                    "خرداد", (3, s => {
+                },
+                {
+                    "خرداد", (3, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("خردا"))
                             .Add(s.Contains("خـردا"))
@@ -48,16 +57,20 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("خ"))
                             .Value();
                     })
-                }, {
-                    "تیر", (4, s => {
+                },
+                {
+                    "تیر", (4, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("یر"))
                             .Add(s.Contains("یـر"))
                             .Add(s.Contains("تـی"))
                             .Value();
                     })
-                }, {
-                    "مرداد", (5, s => {
+                },
+                {
+                    "مرداد", (5, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("مردا"))
                             .Add(s.Contains("مرد"))
@@ -67,8 +80,10 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("مـر"))
                             .Value();
                     })
-                }, {
-                    "شهریور", (6, s => {
+                },
+                {
+                    "شهریور", (6, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("ریور"))
                             .Add(s.Contains("ریـور"))
@@ -84,8 +99,10 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("ری"))
                             .Value();
                     })
-                }, {
-                    "مهر", (7, s => {
+                },
+                {
+                    "مهر", (7, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("مه"))
                             .Add(s.Contains("مـه"))
@@ -93,8 +110,10 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("مـهـر"))
                             .Value();
                     })
-                }, {
-                    "آبان", (8, s => {
+                },
+                {
+                    "آبان", (8, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("آب"))
                             .Add(s.Contains("اب"))
@@ -105,20 +124,26 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("بـا"))
                             .Value();
                     })
-                }, {
-                    "آذر", (9, s => {
+                },
+                {
+                    "آذر", (9, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("آذ"))
                             .Add(s.Contains("اذ"))
                             .Add(s.Contains("ذر"))
                             .Value();
                     })
-                }, {
-                    "دی", (10, s => {
+                },
+                {
+                    "دی", (10, s =>
+                    {
                         return false;
                     })
-                }, {
-                    "بهمن", (11, s => {
+                },
+                {
+                    "بهمن", (11, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("همن"))
                             .Add(s.Contains("هـمن"))
@@ -132,8 +157,10 @@ namespace libc.extended.Helpers {
                             .Add(s.Contains("بهـم"))
                             .Value();
                     })
-                }, {
-                    "اسفند", (12, s => {
+                },
+                {
+                    "اسفند", (12, s =>
+                    {
                         return new OrBool()
                             .Add(s.Contains("اس"))
                             .Add(s.Contains("اسـ"))
@@ -148,19 +175,27 @@ namespace libc.extended.Helpers {
                     })
                 }
             };
-        public static bool GetMonth(string monthString, out int monthNumber, out string monthName) {
-            if (!string.IsNullOrWhiteSpace(monthString)) {
+
+        public static bool GetMonth(string monthString, out int monthNumber, out string monthName)
+        {
+            if (!string.IsNullOrWhiteSpace(monthString))
+            {
                 var month = StringNormalizer.Run(monthString.Trim());
+
                 foreach (var item in dic)
                     if (item.Key.Equals(month, StringComparison.InvariantCultureIgnoreCase) ||
-                        item.Value.resolver(month)) {
+                        item.Value.resolver(month))
+                    {
                         monthNumber = item.Value.num;
                         monthName = item.Key;
+
                         return true;
                     }
             }
+
             monthNumber = -1;
             monthName = null;
+
             return false;
         }
     }

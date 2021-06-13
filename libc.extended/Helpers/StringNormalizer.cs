@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-namespace libc.extended.Helpers {
-    public static class StringNormalizer {
+
+namespace libc.extended.Helpers
+{
+    public static class StringNormalizer
+    {
         private static readonly IDictionary<char, char> map;
-        static StringNormalizer() {
-            map = new Dictionary<char, char> {
+
+        static StringNormalizer()
+        {
+            map = new Dictionary<char, char>
+            {
                 ['۱'] = '1',
                 ['۲'] = '2',
                 ['۳'] = '3',
@@ -19,14 +25,19 @@ namespace libc.extended.Helpers {
                 ['ي'] = 'ی'
             };
         }
-        public static string Run(string input) {
+
+        public static string Run(string input)
+        {
             if (string.IsNullOrWhiteSpace(input)) return input;
             var res = new StringBuilder();
-            foreach (var ch in input) {
+
+            foreach (var ch in input)
+            {
                 var item = ch;
                 if (map.ContainsKey(item)) item = map[item];
                 res.Append(item);
             }
+
             return res.ToString();
         }
     }

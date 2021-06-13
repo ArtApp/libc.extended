@@ -1,16 +1,25 @@
 using System;
 using System.Linq;
-namespace libc.extended.HttpModels {
-    public class DataUri {
+
+namespace libc.extended.HttpModels
+{
+    public class DataUri
+    {
         public string Extension { get; set; }
         public byte[] Data { get; set; }
-        public static bool TryParse(string dataUri, out DataUri res) {
-            try {
-                var match = System.Text.RegularExpressions.Regex.Match(dataUri, @"data:(?<type>.+?);base64,(?<data>.+)");
+
+        public static bool TryParse(string dataUri, out DataUri res)
+        {
+            try
+            {
+                var match = System.Text.RegularExpressions.Regex.Match(dataUri,
+                    @"data:(?<type>.+?);base64,(?<data>.+)");
+
                 var base64Data = match.Groups["data"].Value;
                 var contentType = match.Groups["type"].Value;
                 var binData = Convert.FromBase64String(base64Data);
                 var ext = "";
+
                 if (has(contentType, "png"))
                     ext = ".png";
                 else if (has(contentType, "jpg", "jpeg"))
@@ -23,18 +32,27 @@ namespace libc.extended.HttpModels {
                     ext = ".svg";
                 else
                     res = null;
-                res = new DataUri {
+
+                res = new DataUri
+                {
                     Data = binData,
                     Extension = ext
                 };
+
                 return true;
-            } catch {
+            }
+            catch
+            {
                 res = null;
+
                 return false;
             }
         }
-        private static bool has(string c, params string[] k) {
+
+        private static bool has(string c, params string[] k)
+        {
             var kk = c.ToLower();
+
             return k.Any(kk.Contains);
         }
     }

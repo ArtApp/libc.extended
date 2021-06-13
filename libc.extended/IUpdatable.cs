@@ -1,5 +1,7 @@
-﻿namespace libc.extended {
-    public interface IUpdatable {
+﻿namespace libc.extended
+{
+    public interface IUpdatable
+    {
         void UpdateFrom(IUpdatable o);
     }
 }

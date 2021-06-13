@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
-namespace libc.extended.Helpers {
-    public static class PersianSsnHelper {
+
+namespace libc.extended.Helpers
+{
+    public static class PersianSsnHelper
+    {
         /// <summary>
         ///     تعیین معتبر بودن کد ملی
         /// </summary>
@@ -10,7 +13,8 @@ namespace libc.extended.Helpers {
         ///     در صورتی که کد ملی صحیح باشد خروجی <c>true</c> و در صورتی که کد ملی اشتباه باشد خروجی <c>false</c> خواهد بود
         /// </returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool IsValidNationalCode(string nationalCode) {
+        public static bool IsValidNationalCode(string nationalCode)
+        {
             //در صورتی که کد ملی وارد شده تهی باشد
             if (string.IsNullOrEmpty(nationalCode)) return false;
 
@@ -19,10 +23,12 @@ namespace libc.extended.Helpers {
 
             //در صورتی که کد ملی ده رقم عددی نباشد
             var regex = new System.Text.RegularExpressions.Regex(@"\d{10}");
+
             if (!regex.IsMatch(nationalCode)) return false;
 
             //در صورتی که رقم‌های کد ملی وارد شده یکسان باشد
-            var allDigitEqual = new[] {
+            var allDigitEqual = new[]
+            {
                 "0000000000",
                 "1111111111",
                 "2222222222",
@@ -34,6 +40,7 @@ namespace libc.extended.Helpers {
                 "8888888888",
                 "9999999999"
             };
+
             if (allDigitEqual.Contains(nationalCode)) return false;
 
             //عملیات شرح داده شده در بالا
@@ -50,6 +57,7 @@ namespace libc.extended.Helpers {
             var a = Convert.ToInt32(chArray[9].ToString());
             var b = num0 + num2 + num3 + num4 + num5 + num6 + num7 + num8 + num9;
             var c = b % 11;
+
             return c < 2 && a == c || c >= 2 && 11 - c == a;
         }
     }

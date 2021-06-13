@@ -1,36 +1,49 @@
 using System;
 using System.IO;
-namespace libc.extended.Encryption {
-    public class BitStream : Stream {
+
+namespace libc.extended.Encryption
+{
+    public class BitStream : Stream
+    {
         /// <summary>
         ///     Initialize the stream with capacity
         /// </summary>
         /// <param name="capacity">Capacity of the stream</param>
-        public BitStream(int capacity) {
+        public BitStream(int capacity)
+        {
             Source = new byte[capacity];
         }
+
         /// <summary>
         ///     Initialize the stream with a source byte array
         /// </summary>
         /// <param name="source"></param>
-        public BitStream(byte[] source) {
+        public BitStream(byte[] source)
+        {
             Source = source;
         }
+
         public override bool CanRead => true;
         public override bool CanSeek => true;
         public override bool CanWrite => true;
+
         /// <summary>
         ///     Bit length of the stream
         /// </summary>
         public override long Length => Source.Length * 8;
+
         /// <summary>
         ///     Bit position of the stream
         /// </summary>
         public override long Position { get; set; }
+
         private byte[] Source { get; }
-        public override void Flush() {
+
+        public override void Flush()
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         ///     Read the stream to the buffer
         /// </summary>
@@ -38,7 +51,8 @@ namespace libc.extended.Encryption {
         /// <param name="offset">Offset bit start position of the stream</param>
         /// <param name="count">Number of bits to read</param>
         /// <returns>Number of bits read</returns>
-        public override int Read(byte[] buffer, int offset, int count) {
+        public override int Read(byte[] buffer, int offset, int count)
+        {
             // Temporary position cursor
             var tempPos = Position;
             tempPos += offset;
@@ -50,7 +64,9 @@ namespace libc.extended.Encryption {
             // Stream byte position and in-byte position
             var posCount = tempPos >> 3;
             var posMod = (int) (tempPos - ((tempPos >> 3) << 3));
-            while (tempPos < Position + offset + count && tempPos < Length) {
+
+            while (tempPos < Position + offset + count && tempPos < Length)
+            {
                 // Copy the bit from the stream to buffer
                 if ((Source[posCount] & (0x1 << (7 - posMod))) != 0)
                     buffer[readPosCount] =
@@ -63,58 +79,80 @@ namespace libc.extended.Encryption {
 
                 // Increment position cursors
                 tempPos++;
-                if (posMod == 7) {
+
+                if (posMod == 7)
+                {
                     posMod = 0;
                     posCount++;
                 }
-                else {
+                else
+                {
                     posMod++;
                 }
-                if (readPosMod == 7) {
+
+                if (readPosMod == 7)
+                {
                     readPosMod = 0;
                     readPosCount++;
                 }
-                else {
+                else
+                {
                     readPosMod++;
                 }
             }
+
             var bits = (int) (tempPos - Position - offset);
             Position = tempPos;
+
             return bits;
         }
+
         /// <summary>
         ///     Set up the stream position
         /// </summary>
         /// <param name="offset">Position</param>
         /// <param name="origin">Position origin</param>
         /// <returns>Position after setup</returns>
-        public override long Seek(long offset, SeekOrigin origin) {
-            switch (origin) {
-                case SeekOrigin.Begin: {
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            switch (origin)
+            {
+                case SeekOrigin.Begin:
+                {
                     Position = offset;
+
                     break;
                 }
-                case SeekOrigin.Current: {
+                case SeekOrigin.Current:
+                {
                     Position += offset;
+
                     break;
                 }
-                case SeekOrigin.End: {
+                case SeekOrigin.End:
+                {
                     Position = Length + offset;
+
                     break;
                 }
             }
+
             return Position;
         }
-        public override void SetLength(long value) {
+
+        public override void SetLength(long value)
+        {
             throw new NotImplementedException();
         }
+
         /// <summary>
         ///     Write from buffer to the stream
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="offset">Offset start bit position of buffer</param>
         /// <param name="count">Number of bits</param>
-        public override void Write(byte[] buffer, int offset, int count) {
+        public override void Write(byte[] buffer, int offset, int count)
+        {
             // Temporary position cursor
             var tempPos = Position;
 
@@ -125,7 +163,9 @@ namespace libc.extended.Encryption {
             // Stream byte position and in-byte position
             var posCount = tempPos >> 3;
             var posMod = (int) (tempPos - ((tempPos >> 3) << 3));
-            while (tempPos < Position + count && tempPos < Length) {
+
+            while (tempPos < Position + count && tempPos < Length)
+            {
                 // Copy the bit from buffer to the stream
                 if ((buffer[readPosCount] & (0x1 << (7 - readPosMod))) != 0)
                     Source[posCount] =
@@ -137,21 +177,28 @@ namespace libc.extended.Encryption {
 
                 // Increment position cursors
                 tempPos++;
-                if (posMod == 7) {
+
+                if (posMod == 7)
+                {
                     posMod = 0;
                     posCount++;
                 }
-                else {
+                else
+                {
                     posMod++;
                 }
-                if (readPosMod == 7) {
+
+                if (readPosMod == 7)
+                {
                     readPosMod = 0;
                     readPosCount++;
                 }
-                else {
+                else
+                {
                     readPosMod++;
                 }
             }
+
             Position = tempPos;
         }
     }

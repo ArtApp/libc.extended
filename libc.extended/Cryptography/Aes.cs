@@ -15,7 +15,9 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-namespace libc.extended.Cryptography {
+
+namespace libc.extended.Cryptography
+{
     /// <summary>
     ///     This class uses a symmetric key algorithm (Rijndael/AES) to encrypt and
     ///     decrypt data. As long as encryption and decryption routines use the same
@@ -25,15 +27,20 @@ namespace libc.extended.Cryptography {
     ///     this may not be the most efficient way of handling encryption, so - as
     ///     soon as you feel comfortable with it - you may want to redesign this class.
     /// </summary>
-    public static class Aes {
-        public static string E(string plainText, string password) {
+    public static class Aes
+    {
+        public static string E(string plainText, string password)
+        {
             return Encrypt(plainText, password, "s@1tvalue", "SHA1", 2,
                 "@1B2r3D4MqF6SmH8", 256);
         }
-        public static string D(string cipherText, string password) {
+
+        public static string D(string cipherText, string password)
+        {
             return Decrypt(cipherText, password, "s@1tvalue", "SHA1", 2,
                 "@1B2r3D4MqF6SmH8", 256);
         }
+
         /// <summary>
         ///     Encrypts specified plaintext using Rijndael symmetric key algorithm
         ///     and returns a base64-encoded result.
@@ -77,7 +84,8 @@ namespace libc.extended.Cryptography {
             string hashAlgorithm,
             int passwordIterations,
             string initVector,
-            int keySize) {
+            int keySize)
+        {
             // Convert strings into byte arrays.
             // Let us assume that strings only contain ASCII codes.
             // If strings include Unicode characters, use Unicode, UTF7, or UTF8 
@@ -151,6 +159,7 @@ namespace libc.extended.Cryptography {
             // Return encrypted string.
             return cipherText;
         }
+
         /// <summary>
         ///     Decrypts specified ciphertext using Rijndael symmetric key algorithm.
         /// </summary>
@@ -200,7 +209,8 @@ namespace libc.extended.Cryptography {
             string hashAlgorithm,
             int passwordIterations,
             string initVector,
-            int keySize) {
+            int keySize)
+        {
             // Convert strings defining encryption key characteristics into byte
             // arrays. Let us assume that strings only contain ASCII codes.
             // If strings include Unicode characters, use Unicode, UTF7, or UTF8
